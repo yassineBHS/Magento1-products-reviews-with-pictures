@@ -1,0 +1,50 @@
+<?xml version="1.0"?> 
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This file is a limited source, part of the Magento module named "Yassinos_productreviewspicture" 
+ * dedicated to add an image fields to the review form in the product pages.
+ * The image entered by the client can be modified from the form page from the backoffice 
+ * by the admin.
+ * The images will be imported into the servers under the media folder in a location 
+ * chosen by the administrator from the back office.
+ * Enabling and disabling module functionality is also manageable, Do not hesitate to 
+ * contact us on belhajsalahyassine@gmail.com in case of need, interrogation,
+ * rectification and others ...
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category   Yassinos
+ * @package    Yassinos_Productrewiewspicture
+ * @copyright  Copyright (c) Yassine BELHAJ SALAH . (http://www.yassine-belhajsalah.com)
+ */
+ 
+-->  
+<layout version="0.0.1">   
+    <review_product_list>
+        <reference name="product.info">
+        <block type="review/product_view_list" name="product.info.product_additional_data" as="product_additional_data" >
+                <action method="setTemplate">
+                   <template>productrewiewspicture/list.phtml</template>
+                </action>
+                <block type="review/form" name="product.review.form" as="review_form">
+                    <action method="setTemplate">
+                   <template>productrewiewspicture/form.phtml</template>
+                </action>
+                        <block type="page/html_wrapper" name="product.review.form.fields.before" as="form_fields_before" translate="label">
+                            <label>Review Form Fields Before</label>
+                            <action method="setMayBeInvisible"><value>1</value></action>
+                        </block>
+                </block>
+            </block>
+        </reference>
+    </review_product_list>
+</layout>   
+	

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <productrewiewspicture translate="label" module="productrewiewspicture">
+            <label>Yassinos</label>
+            <sort_order>1</sort_order>
+        </productrewiewspicture>
+    </tabs>
+     
+    <sections>
+        <productrewiewspicture_options translate="label" module="productrewiewspicture">
+            <label>Review's Product Pictures Settings</label>
+            <tab>productrewiewspicture</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <review_pictures translate="label">
+                    <label>Review's Product Pictures Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>                
+                    <fields>
+                        <enable_pictures translate="label">
+                            <label>Enable posting pictures in reviews: </label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable_pictures>
+                        <pictures_location>
+                            <label>Pictures location</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>In case of empty value,pictures will be in /media/product rewiews pictures.</comment>                   
+                        </pictures_location>
+                    </fields>
+                </review_pictures>
+            </groups>                
+        </productrewiewspicture_options>
+    </sections>
+</config>

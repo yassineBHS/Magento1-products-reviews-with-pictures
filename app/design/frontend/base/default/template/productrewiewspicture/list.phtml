@@ -1,0 +1,103 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This file is a limited source, part of the Magento module named "Yassinos_productreviewspicture" 
+ * dedicated to add an image fields to the review form in the product pages.
+ * The image entered by the client can be modified from the form page from the backoffice 
+ * by the admin.
+ * The images will be imported into the servers under the media folder in a location 
+ * chosen by the administrator from the back office.
+ * Enabling and disabling module functionality is also manageable, Do not hesitate to 
+ * contact us on belhajsalahyassine@gmail.com in case of need, interrogation,
+ * rectification and others ...
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category   Yassinos
+ * @package    Yassinos_Productrewiewspicture
+ * @copyright  Copyright (c) Yassine BELHAJ SALAH . (http://www.yassine-belhajsalah.com)
+ */
+?>
+
+<?php 
+$_items = $this->getReviewsCollection()->getItems();
+$mediaURL = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA);
+$picturesDirectory = $this->helper('productrewiewspicture')->getPicturesLocation();
+$isAllowed = $this->helper('productrewiewspicture')->isAllowedPosting();
+?>
+<div class="box-collateral box-reviews" id="customer-reviews">
+    <?php if (count($_items)):?>
+        <div class="review-heading">
+            <h2>
+                <?php echo $this->__('Customer Reviews') ?>
+                <span><?php echo count($_items); ?> item(s)</span>
+            </h2>
+            <?php echo $this->getChildHtml('toolbar') ?>
+        </div>
+        <dl>
+        <?php foreach ($_items as $_review):?>
+            <dt>
+                <a href="<?php echo $this->getReviewUrl($_review->getId()) ?>">
+                    <?php echo $this->escapeHtml($_review->getTitle()) ?>
+                </a>
+            </dt>
+            <dd>
+                <?php $_votes = $_review->getRatingVotes(); ?>
+
+                <?php echo nl2br($this->escapeHtml($_review->getDetail())) ?>
+
+
+                <?php if (count($_votes)): ?>
+                <table class="ratings-table">
+                    <colgroup>
+                        <col class="review-label" />
+                        <col class="review-value" />
+                    </colgroup>
+                    <tbody>
+                        <?php foreach ($_votes as $_vote): ?>
+                        <tr>
+                            <th><?php echo $this->escapeHtml($_vote->getRatingCode()) ?></th>
+                            <td>
+                                <div class="rating-box">
+                                    <div class="rating" style="width:<?php echo $_vote->getPercent() ?>%;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <?php endif; ?>
+                <?php
+                /*
+                 * show review picture on the list approved reviews
+                 */
+                ?>
+                
+                <?php if($isAllowed && $url = $_review->getPictureUrl()): ;?> 
+                <span class="review-meta">
+                    <?php echo Mage::helper('productrewiewspicture')->getImageHtmlAction( $mediaURL.$picturesDirectory.DS.$url,'150px'); ?>
+                </span>
+                <?php endif; ?>
+                
+                <span class="review-meta">
+                    <?php echo $this->__('Review by %s', $this->escapeHtml($_review->getNickname())) ?>
+                    /
+                   <?php echo $this->__('(Posted on %s)', $this->formatDate($_review->getCreatedAt()), 'long') ?>
+                </span>
+            </dd>
+        <?php endforeach; ?>
+        </dl>
+
+        <?php // echo $this->getChildHtml('toolbar') ?>
+    <?php elseif($this->getParentBlock()): ?>
+        <?php echo $this->getParentBlock()->getReviewsSummaryHtml($this->getProduct(), 'short', true)?>
+    <?php endif;?>
+    <?php echo $this->getChildHtml('review_form') ?>
+</div>
